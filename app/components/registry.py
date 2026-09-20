@@ -3,8 +3,8 @@ import reflex as rx
 from app.states.registry_state import AccountRow, RegistryState
 
 
-BUTTON = "inline-flex items-center justify-center gap-2 rounded-md border border-[#d7d9d3] bg-white px-3 py-2 text-xs font-medium text-[#233641] hover:bg-[#eef2ee] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-CHECKBOX = "h-4 w-4 cursor-pointer rounded accent-teal-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700 disabled:cursor-not-allowed"
+BUTTON = "inline-flex items-center justify-center gap-2 rounded-md border border-[#d7d9d3] bg-white px-3 py-2 text-xs font-medium text-[#233641] hover:bg-[#eef2ee] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+CHECKBOX = "h-4 w-4 cursor-pointer rounded accent-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700 disabled:cursor-not-allowed"
 
 
 def heading_cell(label: str, icon: str) -> rx.Component:
@@ -54,7 +54,7 @@ def account_row(row: AccountRow) -> rx.Component:
                 ),
                 class_name=rx.cond(
                     row["user_type"] == "admin",
-                    "inline-flex w-fit items-center gap-2 rounded-md border border-teal-800/15 bg-teal-50 px-2.5 py-1 text-xs font-medium text-teal-800",
+                    "inline-flex w-fit items-center gap-2 rounded-md border border-blue-800/15 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-800",
                     "inline-flex w-fit items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600",
                 ),
             ),
@@ -72,7 +72,7 @@ def account_row(row: AccountRow) -> rx.Component:
         aria_selected=RegistryState.selected_ids.contains(row["id"]),
         class_name=rx.cond(
             RegistryState.selected_ids.contains(row["id"]),
-            "border-b border-[#dce5de] bg-[#eaf3ed] cursor-pointer transition-colors",
+            "border-b border-blue-200 bg-blue-50 cursor-pointer transition-colors",
             "border-b border-[#e8e9e2] odd:bg-white even:bg-[#fcfcf9] hover:bg-[#f0f4ee] cursor-pointer transition-colors",
         ),
         key=row["id"],
@@ -92,7 +92,7 @@ def registry_table() -> rx.Component:
     return rx.el.section(
         rx.el.div(
             rx.el.div(
-                rx.icon("list-checks", class_name="h-4 w-4 text-teal-800"),
+                rx.icon("list-checks", class_name="h-4 w-4 text-blue-800"),
                 rx.el.span(
                     "Account entries", class_name="text-sm font-semibold"
                 ),
@@ -154,7 +154,7 @@ def registry_table() -> rx.Component:
             rx.el.div(
                 rx.icon(
                     "loader-circle",
-                    class_name="h-5 w-5 animate-spin text-teal-700",
+                    class_name="h-5 w-5 animate-spin text-blue-700",
                 ),
                 rx.el.span("Loading account entries…"),
                 role="status",
@@ -209,7 +209,7 @@ def registry() -> rx.Component:
     return rx.el.main(
         rx.el.div(
             rx.el.div(
-                rx.icon("book-open-check", class_name="h-5 w-5 text-teal-800"),
+                rx.icon("book-open-check", class_name="h-5 w-5 text-blue-800"),
                 rx.el.span(
                     "ACCOUNT REGISTRY",
                     class_name="text-[11px] font-semibold tracking-[0.2em]",
@@ -260,7 +260,7 @@ def registry() -> rx.Component:
                         default_value=RegistryState.search,
                         on_change=RegistryState.set_search.debounce(250),
                         aria_label="Search by username",
-                        class_name="h-10 w-full rounded-md border border-[#d7dcd1] bg-white pl-10 pr-4 text-sm text-[#233641] placeholder:text-[#929c94] focus-visible:outline-2 focus-visible:outline-teal-700",
+                        class_name="h-10 w-full rounded-md border border-[#d7dcd1] bg-white pl-10 pr-4 text-sm text-[#233641] placeholder:text-[#929c94] focus-visible:outline-2 focus-visible:outline-blue-700",
                     ),
                     class_name="relative w-full sm:w-80",
                 ),
@@ -277,8 +277,8 @@ def registry() -> rx.Component:
                             == label.lower(),
                             class_name=rx.cond(
                                 RegistryState.user_type == label.lower(),
-                                "rounded-md bg-[#233f40] px-4 py-2 text-xs font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700",
-                                "rounded-md bg-transparent px-4 py-2 text-xs font-medium text-[#67796f] hover:bg-[#e8ede3] focus-visible:outline-2 focus-visible:outline-teal-700",
+                                "rounded-md bg-blue-900 px-4 py-2 text-xs font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700",
+                                "rounded-md bg-transparent px-4 py-2 text-xs font-medium text-[#67796f] hover:bg-[#e8ede3] focus-visible:outline-2 focus-visible:outline-blue-700",
                             ),
                         ),
                     ),
@@ -297,16 +297,16 @@ def registry() -> rx.Component:
             ),
             rx.el.div(
                 rx.el.div(
-                    rx.icon("check-check", class_name="h-4 w-4 text-teal-700"),
+                    rx.icon("check-check", class_name="h-4 w-4 text-blue-700"),
                     rx.el.span(
                         f"{RegistryState.selected_ids.length()} selected",
-                        class_name="font-medium text-teal-900",
+                        class_name="font-medium text-blue-900",
                     ),
                     rx.el.button(
                         "Clear selection",
                         on_click=RegistryState.clear_selection,
                         disabled=RegistryState.selected_ids.length() == 0,
-                        class_name="ml-3 text-xs text-[#6d7f73] underline underline-offset-4 hover:text-teal-800 disabled:opacity-35 focus-visible:outline-2 focus-visible:outline-teal-700",
+                        class_name="ml-3 text-xs text-[#6d7f73] underline underline-offset-4 hover:text-blue-800 disabled:opacity-35 focus-visible:outline-2 focus-visible:outline-blue-700",
                     ),
                     class_name="flex items-center gap-2 text-xs",
                 ),
