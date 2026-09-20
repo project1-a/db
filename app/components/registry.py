@@ -258,7 +258,7 @@ def registry() -> rx.Component:
                     rx.el.input(
                         placeholder="Search by username…",
                         default_value=RegistryState.search,
-                        on_change=RegistryState.change_search.debounce(250),
+                        on_change=RegistryState.set_search.debounce(250),
                         aria_label="Search by username",
                         class_name="h-10 w-full rounded-md border border-[#d7dcd1] bg-white pl-10 pr-4 text-sm text-[#233641] placeholder:text-[#929c94] focus-visible:outline-2 focus-visible:outline-teal-700",
                     ),
@@ -272,10 +272,11 @@ def registry() -> rx.Component:
                         ["All", "Admin", "User"],
                         lambda label: rx.el.button(
                             label,
-                            on_click=RegistryState.change_type(label),
-                            aria_pressed=RegistryState.user_type == label,
+                            on_click=RegistryState.set_user_type(label.lower()),
+                            aria_pressed=RegistryState.user_type
+                            == label.lower(),
                             class_name=rx.cond(
-                                RegistryState.user_type == label,
+                                RegistryState.user_type == label.lower(),
                                 "rounded-md bg-[#233f40] px-4 py-2 text-xs font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700",
                                 "rounded-md bg-transparent px-4 py-2 text-xs font-medium text-[#67796f] hover:bg-[#e8ede3] focus-visible:outline-2 focus-visible:outline-teal-700",
                             ),

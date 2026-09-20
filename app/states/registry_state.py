@@ -138,6 +138,12 @@ class RegistryState(rx.State):
     def clear_selection(self):
         self.selected_ids = []
 
+    @rx.event
+    def clear_filters(self):
+        self.search = ""
+        self.user_type = "all"
+        self._reconcile_selection()
+
     @rx.event(background=True)
     async def load_accounts(self):
         async with self:
