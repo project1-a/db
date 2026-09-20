@@ -57,13 +57,6 @@ SAMPLE_ACCOUNTS: list[AccountRow] = [
         "updated_at": "16 Feb 2025 · 09:17 UTC",
     },
     {
-        "id": 107,
-        "username": "hana.sato",
-        "user_type": "user",
-        "created_at": "09 Feb 2025 · 15:19 UTC",
-        "updated_at": "13 Feb 2025 · 18:05 UTC",
-    },
-    {
         "id": 108,
         "username": "lucas.fairchild",
         "user_type": "admin",
